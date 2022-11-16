@@ -1,9 +1,22 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import React from 'react'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [ cookie, setCookie ] = useState('');
+
+  const apiRequest = async () => {
+    const response = await fetch('https://cookie-test-server-production.up.railway.app/');
+    const data = await response.json()
+    setCookie(data.cookie);
+    console.log(data)
+  }
+
+  React.useEffect(() => {
+    apiRequest()
+  }, [])
 
   return (
     <div className="App">
@@ -11,9 +24,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
+          {cookie} -- 🍪
         </p>
         <p>
           Edit <code>App.jsx</code> and save to test HMR updates.
