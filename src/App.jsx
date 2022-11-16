@@ -8,9 +8,12 @@ function App() {
   const [ cookie, setCookie ] = useState('');
 
   const apiRequest = async () => {
-    const response = await fetch('https://cookie-test-server-production.up.railway.app/', {
+    const response = await fetch(
+      'https://cookie-test-server-production.up.railway.app', 
+      // 'http://localhost:3001/',
+      {
       credentials: 'include',
-    });
+      });
     const data = await response.json()
     setCookie(data.cookie);
     console.log(data)
